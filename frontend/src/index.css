@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Dark mode (default) */
+  :root,
+  .dark {
+    --bg-base: #020617;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --border: #1e293b;
+    --border-hover: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
+    --card-bg: #0f172a;
+    --input-bg: #1e293b;
+    --sidebar-bg: #0f172a;
+    --header-bg: #0f172a;
+    --text-heading: #ffffff;
+  }
+
+  /* Light mode */
+  .light {
+    --bg-base: #f8fafc;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f1f5f9;
+    --bg-tertiary: #e2e8f0;
+    --border: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --card-bg: #ffffff;
+    --input-bg: #f8fafc;
+    --sidebar-bg: #0f172a;
+    --header-bg: #ffffff;
+    --text-heading: #000080;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    @apply font-sans antialiased transition-colors duration-200;
+  }
+
+  h1, h2 {
+    color: var(--text-heading);
+    @apply transition-colors duration-200;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+}
+
+@layer components {
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    @apply rounded-xl p-6 transition-colors duration-200;
+  }
+
+  .card-sm {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    @apply rounded-lg p-4 transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg 
+           transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    @apply font-medium py-2 px-4 rounded-lg transition-colors duration-200 hover:border-slate-400;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg 
+           transition-colors duration-200;
+  }
+
+  .input {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    @apply rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 
+           focus:border-transparent transition-colors duration-200;
+  }
+
+  .input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .label {
+    color: var(--text-secondary);
+    @apply block text-sm font-medium mb-1;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-blue   { @apply badge bg-blue-900/50 text-blue-300; }
+  .badge-green  { @apply badge bg-green-900/50 text-green-300; }
+  .badge-yellow { @apply badge bg-yellow-900/50 text-yellow-300; }
+  .badge-red    { @apply badge bg-red-900/50 text-red-300; }
+  .badge-purple { @apply badge bg-purple-900/50 text-purple-300; }
+
+  /* Light mode badge overrides */
+  .light .badge-blue   { @apply bg-blue-100 text-blue-700; }
+  .light .badge-green  { @apply bg-green-100 text-green-700; }
+  .light .badge-yellow { @apply bg-yellow-100 text-yellow-700; }
+  .light .badge-red    { @apply bg-red-100 text-red-700; }
+  .light .badge-purple { @apply bg-purple-100 text-purple-700; }
+
+  /* Page containers in light mode */
+  .light .card      { @apply shadow-sm; }
+  .light .card-sm   { @apply shadow-sm; }
+}
+
+@layer utilities {
+  .glass-morphism {
+    @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-2xl transition-all duration-300;
+  }
+  
+  .glass-morphism-dark {
+    @apply backdrop-blur-md bg-slate-900/40 border border-slate-700/30 shadow-2xl transition-all duration-300;
+  }
+
+  .tab-glow {
+    box-shadow: 0 0 20px -5px theme('colors.primary.500');
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+  }
+
+  .animate-slow-fade {
+    animation: fade-in 0.8s ease-out;
+  }
+}
+
+/* Fix Chrome Autofill backgrounds keeping them transparent */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #0f172a !important;
+}
