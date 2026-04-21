@@ -3,6 +3,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --silent
 COPY . .
+
+# Pass API URL during the build step
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 RUN npm run build
 
 FROM nginx:alpine
