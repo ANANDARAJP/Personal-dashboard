@@ -14,6 +14,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         // Just redirect to dashboard for now
-        getRedirectStrategy().sendRedirect(request, response, "http://localhost:3000/dashboard");
+        getRedirectStrategy().sendRedirect(request, response, "https://personal-dashboard-1-6bo4.onrender.com/dashboard");
     }
 }
